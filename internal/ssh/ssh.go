@@ -23,7 +23,7 @@ func SetupSSH() error {
 		cmd := exec.Command("ssh-keygen", "-t", "ed25519", "-C", email, "-N", "")
 		err := cmd.Run()
 		if err != nil {
-			return fmt.Errorf("failed to generate SSH key: %v", err)
+			return fmt.Errorf("failed to generate SSH key: %w", err)
 		}
 	}
 
