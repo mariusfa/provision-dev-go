@@ -14,6 +14,10 @@ func printInitializationBanner() {
     fmt.Println(border)
 }
 
+func printRememberSourceProfile() {
+	fmt.Println("Remember to source your profile: source ~/.profile")
+}
+
 func main() {
     printInitializationBanner()
 
@@ -22,4 +26,6 @@ func main() {
 		fmt.Printf("Error setting up SSH: %v\n", err)
 		return
 	}
+
+	printRememberSourceProfile()
 }
