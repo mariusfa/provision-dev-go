@@ -6,12 +6,12 @@ import (
 )
 
 func printInitializationBanner() {
-    border := "============================"
-    message := "Go provision-dev initializing"
+	border := "============================"
+	message := "Go provision-dev initializing"
 
-    fmt.Println(border)
-    fmt.Println(message)
-    fmt.Println(border)
+	fmt.Println(border)
+	fmt.Println(message)
+	fmt.Println(border)
 }
 
 func printRememberSourceProfile() {
@@ -19,7 +19,7 @@ func printRememberSourceProfile() {
 }
 
 func main() {
-    printInitializationBanner()
+	printInitializationBanner()
 
 	err := ssh.SetupSSH()
 	if err != nil {

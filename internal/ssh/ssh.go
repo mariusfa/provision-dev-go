@@ -24,7 +24,6 @@ func SetupSSH() error {
 		}
 	}
 
-
 	if err := setPublicKey(publicKeyPath); err != nil {
 		return err
 	}
