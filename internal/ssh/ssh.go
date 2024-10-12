@@ -16,11 +16,12 @@ func SetupSSH() error {
 	}
 
 	publicKeyPath := os.Getenv("HOME") + "/.ssh/id_ed25519.pub"
+	privateKeyPath := os.Getenv("HOME") + "/.ssh/id_ed25519"
 
 	if _, err := os.Stat(publicKeyPath); os.IsNotExist(err) {
 		// Generate SSH keys using ssh-keygen command
 		fmt.Println("Generating SSH key pair...")
-		cmd := exec.Command("ssh-keygen", "-t", "ed25519", "-C", email, "-N", "")
+		cmd := exec.Command("ssh-keygen", "-t", "ed25519", "-C", email, "-f", privateKeyPath, "-N", "")
 		err := cmd.Run()
 		if err != nil {
 			return fmt.Errorf("failed to generate SSH key: %w", err)
