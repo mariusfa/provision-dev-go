@@ -3,6 +3,15 @@
 GO_VERSION="go1.23.2.linux-amd64.tar.gz"
 GO_INSTALL_PATH="/usr/local/go"
 
+function print_initialization_banner {
+  local border="============================"
+  local message="Script provision-dev initializing"
+
+  echo "$border"
+  echo "$message"
+  echo "$border"
+}
+
 function is_go_installed {
   if command -v go &> /dev/null; then
     return 0
@@ -26,18 +35,18 @@ function install_go {
   echo "Go has been installed."
 }
 
-function run_go_file {
-  local go_file="$1"
-  if [ -f "$go_file" ]; then
-    echo "Running Go file $go_file"
-    go run "$go_file"
+function run_go_project {
+  if [ -f "cmd/main.go" ]; then
+    echo "Running Go project from cmd/main.go"
+    go run cmd/main.go
   else
-    echo "Go file $go_file does not exist."
+    echo "cmd/main.go does not exist."
     exit 1
   fi
 }
 
 function main {
+  print_initialization_banner
   if is_go_installed; then
     echo "Go is already installed."
   else
@@ -45,7 +54,7 @@ function main {
     install_go
   fi
 
-  run_go_file "$1"
+  run_go_project
 }
 
 # Entry point
