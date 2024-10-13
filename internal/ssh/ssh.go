@@ -1,5 +1,7 @@
 package ssh
 
+// TODO: Create test file
+
 import (
 	"bufio"
 	"fmt"

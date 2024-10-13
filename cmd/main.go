@@ -18,6 +18,7 @@ func printRememberSourceProfile() {
 	fmt.Println("Remember to source your profile: source ~/.profile")
 }
 
+// TODO: check for command line argument if to run only one package. For instance only run ssh package
 func main() {
 	printInitializationBanner()
 
