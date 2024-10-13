@@ -12,17 +12,16 @@ import (
 var publicKey string
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
+var publicKeyPath = os.Getenv("HOME") + "/.ssh/id_ed25519.pub"
+var privateKeyPath = os.Getenv("HOME") + "/.ssh/id_ed25519"
 
 func SetupSSH() error {
-	publicKeyPath := os.Getenv("HOME") + "/.ssh/id_ed25519.pub"
-	privateKeyPath := os.Getenv("HOME") + "/.ssh/id_ed25519"
-
 	if _, err := os.Stat(publicKeyPath); os.IsNotExist(err) {
 		email, err := askForEmail()
 		if err != nil {
 			return err
 		}
-		if err := generateSSHKey(email, privateKeyPath); err != nil {
+		if err := generateSshKey(email); err != nil {
 			return err
 		}
 	}
@@ -47,13 +46,13 @@ func askForEmail() (string, error) {
 	return email[:len(email)-1], nil // Remove the newline character
 }
 
-func generateSSHKey(email string, privateKeyPath string) error {
+func generateSshKey(email string) error {
 	fmt.Println("Generating SSH key pair...")
 	err := runner.Run("ssh-keygen", "-t", "ed25519", "-C", email, "-f", privateKeyPath, "-N", "")
 	if err != nil {
 		return fmt.Errorf("failed to generate SSH key: %w", err)
 	}
-	
+
 	return nil
 }
 
