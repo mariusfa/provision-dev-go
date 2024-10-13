@@ -10,7 +10,6 @@ import (
 var publicKey string
 
 func SetupSSH() error {
-
 	publicKeyPath := os.Getenv("HOME") + "/.ssh/id_ed25519.pub"
 	privateKeyPath := os.Getenv("HOME") + "/.ssh/id_ed25519"
 
