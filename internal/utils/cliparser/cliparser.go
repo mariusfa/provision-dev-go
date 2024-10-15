@@ -10,10 +10,13 @@ const (
 	UNKNOWN
 )
 
-type CliParserF func() SubPackage
+var GetCliArgs = func() []string {
+	return os.Args[1:]
+}
 
+// TODO: use err instead of unknown
 func CliParser() SubPackage {
-	args := os.Args[1:]
+	args := GetCliArgs()
 	argsLength := len(args)
 	if argsLength > 1 {
 		return UNKNOWN
