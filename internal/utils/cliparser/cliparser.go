@@ -5,8 +5,8 @@ import "os"
 type SubPackage int
 
 const (
-	SSH SubPackage = iota
-	ALL
+	ALL SubPackage = iota
+	SSH
 	UNKNOWN
 )
 
