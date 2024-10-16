@@ -7,7 +7,10 @@ func TestCliParser(t *testing.T) {
 		return []string{"ssh"}
 	}
 
-	result := CliParser()
+	result, error := CliParser()
+	if error != nil {
+		t.Errorf("Expected nil, got %v", error)
+	}
 	if result != SSH {
 		t.Errorf("Expected SSH, got %v", result)
 	}

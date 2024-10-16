@@ -1,6 +1,9 @@
 package cliparser
 
-import "os"
+import (
+	"errors"
+	"os"
+)
 
 type SubPackage int
 
@@ -14,22 +17,21 @@ var GetCliArgs = func() []string {
 	return os.Args[1:]
 }
 
-// TODO: use err instead of unknown
-func CliParser() SubPackage {
+func CliParser() (SubPackage, error) {
 	args := GetCliArgs()
 	argsLength := len(args)
 	if argsLength > 1 {
-		return UNKNOWN
+		return UNKNOWN, errors.New("too many args")
 	}
 
 	if argsLength == 0 {
-		return ALL
+		return ALL, nil
 	}
 
 	command := args[0]
 
 	if command == "ssh" {
-		return SSH
+		return SSH, nil
 	}
-	return UNKNOWN
+	return UNKNOWN, errors.New("unknown command")
 }
