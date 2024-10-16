@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
 )
@@ -20,20 +21,20 @@ func printRememberSourceProfile() {
 }
 
 func runAll() {
-	err := ssh.SetupSSH()
-	if err != nil {
-		fmt.Printf("Error setting up SSH: %v\n", err)
-		return
-	}
+	println("Running all")
+	runSsh()
 }
 
 func runSsh() {
-	println("Running SSH")
+	println("Running SSH setup")
 	err := ssh.SetupSSH()
 	if err != nil {
-		fmt.Printf("Error setting up SSH: %v\n", err)
-		return
+		log.Fatalf("Error setting up SSH: %v\n", err)
 	}
+}
+
+func runGit() {
+	println("Running Git setup")
 }
 
 func main() {
@@ -50,6 +51,8 @@ func main() {
 		runAll()
 	case cliparser.SSH:
 		runSsh()
+	case cliparser.GIT:
+		runGit()
 	default:
 		fmt.Println("Invalid option")
 	}

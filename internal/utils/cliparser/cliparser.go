@@ -10,6 +10,7 @@ type SubPackage int
 const (
 	ALL SubPackage = iota
 	SSH
+	GIT
 	UNKNOWN
 )
 
@@ -30,8 +31,12 @@ func CliParser() (SubPackage, error) {
 
 	command := args[0]
 
-	if command == "ssh" {
+	switch command {
+	case "ssh":
 		return SSH, nil
+	case "git":
+		return GIT, nil
 	}
+
 	return UNKNOWN, errors.New("unknown command")
 }
