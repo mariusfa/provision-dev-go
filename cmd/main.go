@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"provision/internal/git"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
 )
@@ -35,6 +36,10 @@ func runSsh() {
 
 func runGit() {
 	println("Running Git setup")
+	err := git.SetupGit()
+	if err != nil {
+		log.Fatalf("Error setting up Git: %v\n", err)
+	}
 }
 
 func main() {
