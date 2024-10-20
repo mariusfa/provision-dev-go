@@ -30,6 +30,8 @@ func SetupGit() error {
 		return err
 	}
 
+	println("Git config set")
+
 	return nil
 }
 
