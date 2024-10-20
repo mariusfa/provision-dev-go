@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"provision/internal/alias"
 	"provision/internal/git"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
@@ -69,4 +70,8 @@ func runGit() {
 
 func runAlias() {
 	println("Running Alias setup")
+	err := alias.SetupAlias()
+	if err != nil {
+		log.Fatalf("Error setting up aliases: %v\n", err)
+	}
 }
