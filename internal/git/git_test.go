@@ -12,6 +12,9 @@ func TestGitSetup(t *testing.T) {
 	askForUsername = func() (string, error) {
 		return "testuser", nil
 	}
+	setGitConfig = func(_, _ string) error {
+		return nil
+	}
 	err := SetupGit()
 	if err != nil {
 		t.Errorf("Expected nil, got %v", err)
