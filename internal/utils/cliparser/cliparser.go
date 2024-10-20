@@ -11,6 +11,7 @@ const (
 	ALL SubPackage = iota
 	SSH
 	GIT
+	ALIAS
 	UNKNOWN
 )
 
@@ -36,6 +37,8 @@ func CliParser() (SubPackage, error) {
 		return SSH, nil
 	case "git":
 		return GIT, nil
+	case "alias":
+		return ALIAS, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")

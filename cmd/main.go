@@ -8,6 +8,31 @@ import (
 	"provision/internal/utils/cliparser"
 )
 
+func main() {
+	printInitializationBanner()
+
+	cliOptions, err := cliparser.CliParser()
+	if err != nil {
+		fmt.Printf("Error parsing CLI: %v\n", err)
+		return
+	}
+
+	switch cliOptions {
+	case cliparser.ALL:
+		runAll()
+	case cliparser.SSH:
+		runSsh()
+	case cliparser.GIT:
+		runGit()
+	case cliparser.ALIAS:
+		runAlias()
+	default:
+		fmt.Println("Invalid option")
+	}
+
+	printRememberSourceProfile()
+}
+
 func printInitializationBanner() {
 	border := "============================"
 	message := "Go provision-dev initializing"
@@ -42,25 +67,6 @@ func runGit() {
 	}
 }
 
-func main() {
-	printInitializationBanner()
-
-	cliOptions, err := cliparser.CliParser()
-	if err != nil {
-		fmt.Printf("Error parsing CLI: %v\n", err)
-		return
-	}
-
-	switch cliOptions {
-	case cliparser.ALL:
-		runAll()
-	case cliparser.SSH:
-		runSsh()
-	case cliparser.GIT:
-		runGit()
-	default:
-		fmt.Println("Invalid option")
-	}
-
-	printRememberSourceProfile()
+func runAlias() {
+	println("Running Alias setup")
 }
