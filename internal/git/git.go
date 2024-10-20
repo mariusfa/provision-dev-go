@@ -33,7 +33,7 @@ func SetupGit() error {
 	return nil
 }
 
-func isGitConfigSet() bool {
+var isGitConfigSet = func() bool {
 	username, err := runner.RunWithOutput("git", "config", "--get", "user.name")
 	if err != nil {
 		return false
@@ -45,15 +45,15 @@ func isGitConfigSet() bool {
 	return username != "" && email != ""
 }
 
-func askForUsername() (string, error) {
+var askForUsername = func() (string, error) {
 	return userinput.AskForInput("Enter your username for git: ")
 }
 
-func askForEmail() (string, error) {
+var askForEmail = func() (string, error) {
 	return userinput.AskForInput("Enter your email for git: ")
 }
 
-func setGitConfig(username, email string) error {
+var setGitConfig = func(username, email string) error {
 	if err := runner.Run("git", "config", "--global", "user.name", username); err != nil {
 		return err
 	}

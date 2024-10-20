@@ -11,6 +11,10 @@ func (f *fakeRunner) Run(name string, arg ...string) error {
 	return nil
 }
 
+func (f *fakeRunner) RunWithOutput(name string, arg ...string) (string, error) {
+	return "", nil
+}
+
 func newFakeRunner() *fakeRunner {
 	return &fakeRunner{}
 }
