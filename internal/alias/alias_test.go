@@ -4,14 +4,14 @@ import "testing"
 
 func TestSetupAliasNoAliases(t *testing.T) {
 	aliasesWritten := []string{}
-	writeAliases := func(aliases []string) error {
+	writeAliases = func(aliases []string) error {
 		aliasesWritten = aliases
 		return nil
 	}
-	getAliasesFromBash := func() ([]string, error) {
+	getAliasesFromBash = func() ([]string, error) {
 		return []string{}, nil
 	}
-	getAliasesFromAliasFile := func() ([]string, error) {
+	getAliasesFromAliasFile = func() ([]string, error) {
 		return []string{
 			"alias ..='cd ..'",
 		}, nil
