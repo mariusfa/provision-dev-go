@@ -56,6 +56,7 @@ func runAll() {
 	runSsh()
 	runGit()
 	runAlias()
+	runNeovim()
 }
 
 func runSsh() {
