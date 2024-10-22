@@ -9,6 +9,8 @@ import (
 	"provision/internal/utils/cliparser"
 )
 
+// TODO: create a custom print util to print with colors and icons
+
 func main() {
 	printInitializationBanner()
 
@@ -50,6 +52,8 @@ func printRememberSourceProfile() {
 func runAll() {
 	println("Running all")
 	runSsh()
+	runGit()
+	runAlias()
 }
 
 func runSsh() {
