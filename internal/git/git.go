@@ -62,7 +62,7 @@ var setGitConfig = func(username, email string) error {
 	if err := runner.Run("git", "config", "--global", "user.email", email); err != nil {
 		return err
 	}
-	if err := runner.Run("git", "config", "--global", "core.editor", "neovim"); err != nil {
+	if err := runner.Run("git", "config", "--global", "core.editor", "nvim"); err != nil {
 		return err
 	}
 	return nil
