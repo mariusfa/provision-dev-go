@@ -2,6 +2,7 @@ package alias
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"path/filepath"
 	"slices"
@@ -40,11 +41,20 @@ var getAliasesFromBash = func() ([]string, error) {
 	}
 
 	bashrcPath := filepath.Join(homeDir, ".bashrc")
-	return getAliasFromFile(bashrcPath)
+	aliasesBashrc, err := getAliasFromFile(bashrcPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read aliases from bashrc: %w", err)
+	}
+
+	return aliasesBashrc, nil
 }
 
 var getAliasesFromAliasFile = func() ([]string, error) {
-	return getAliasFromFile("./aliases")
+	aliasesInAliasFile, err := getAliasFromFile("./aliases")
+	if err != nil {
+		return nil, fmt.Errorf("failed to read from alias file: %w", err)
+	}
+	return aliasesInAliasFile, nil
 }
 
 func getAliasFromFile(filePath string) ([]string, error) {
@@ -78,6 +88,28 @@ func findMissingAliasesInBashrc(aliases []string, bashAliases []string) []string
 }
 
 var writeAliases = func(aliases []string) error {
-	// TODO: Implement this function
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return err
+	}
+
+	bashrcPath := filepath.Join(homeDir, ".bashrc")
+	return appendToFile(bashrcPath, aliases)
+}
+
+func appendToFile(filePath string, lines []string) error {
+	file, err := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
+	if err != nil {
+		return fmt.Errorf("failed to open file to append to: %w", err)
+	}
+	defer file.Close()
+
+	for _, line := range lines {
+		_, err = file.WriteString(line + "\n")
+		if err != nil {
+			return fmt.Errorf("failed to write alias to file: %w", err)
+		}
+	}
+
 	return nil
 }
