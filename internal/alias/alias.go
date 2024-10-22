@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-// TODO: Populate aliases file with aliases
-
 func SetupAlias() error {
 	bashAliases, err := getAliasesFromBash()
 	if err != nil {
