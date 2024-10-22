@@ -47,6 +47,7 @@ func printInitializationBanner() {
 
 func printRememberSourceProfile() {
 	fmt.Println("Remember to source your profile: source ~/.profile")
+	fmt.Println("Remember to source your bashrc: source ~/.bashrc")
 }
 
 func runAll() {
