@@ -5,6 +5,7 @@ import (
 	"log"
 	"provision/internal/alias"
 	"provision/internal/git"
+	"provision/internal/neovim"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
 )
@@ -78,5 +79,13 @@ func runAlias() {
 	err := alias.SetupAlias()
 	if err != nil {
 		log.Fatalf("Error setting up aliases: %v\n", err)
+	}
+}
+
+func runNeovim() {
+	println("Running Neovim setup")
+	err := neovim.SetupNeovim()
+	if err != nil {
+		log.Fatalf("Error setting up Neovim: %v\n", err)
 	}
 }
