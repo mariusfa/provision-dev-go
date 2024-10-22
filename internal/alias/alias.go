@@ -4,15 +4,32 @@ import (
 	"bufio"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 )
 
 func SetupAlias() error {
-	return nil
-}
+	bashAliases, err := getAliasesFromBash()
+	if err != nil {
+		return err
+	}
 
-var writeAliases = func(aliases []string) error {
-	// TODO: Implement
+	aliasesInProject, err := getAliasesFromAliasFile()
+	if err != nil {
+		return err
+	}
+
+	aliasesToInsert := findMissingAliasesInBashrc(aliasesInProject, bashAliases)
+	if len(aliasesToInsert) > 0 {
+		err = writeAliases(aliasesToInsert)
+		if err != nil {
+			return err
+		}
+		println("Aliases inserted in .bashrc")
+	} else {
+		println("All aliases are already in .bashrc")
+	}
+
 	return nil
 }
 
@@ -48,4 +65,19 @@ func getAliasFromFile(filePath string) ([]string, error) {
 	}
 
 	return aliasesFound, nil
+}
+
+func findMissingAliasesInBashrc(aliases []string, bashAliases []string) []string {
+	missingAliases := []string{}
+	for _, alias := range aliases {
+		if !slices.Contains(bashAliases, alias) {
+			missingAliases = append(missingAliases, alias)
+		}
+	}
+	return missingAliases
+}
+
+var writeAliases = func(aliases []string) error {
+	// TODO: Implement this function
+	return nil
 }
