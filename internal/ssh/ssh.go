@@ -9,9 +9,11 @@ import (
 
 var publicKey string
 
-var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
-var publicKeyPath = os.Getenv("HOME") + "/.ssh/id_ed25519.pub"
-var privateKeyPath = os.Getenv("HOME") + "/.ssh/id_ed25519"
+var (
+	runner         commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
+	publicKeyPath                               = os.Getenv("HOME") + "/.ssh/id_ed25519.pub"
+	privateKeyPath                              = os.Getenv("HOME") + "/.ssh/id_ed25519"
+)
 
 func SetupSSH() error {
 	if _, err := os.Stat(publicKeyPath); os.IsNotExist(err) {
@@ -30,6 +32,7 @@ func SetupSSH() error {
 
 	fmt.Println("Public SSH Key:")
 	fmt.Println(publicKey)
+	enterToContinue()
 
 	return nil
 }
@@ -52,6 +55,11 @@ func generateSshKey(email string) error {
 	}
 
 	return nil
+}
+
+func enterToContinue() {
+	fmt.Print("Copy ssh key and setup in github before continuing. Press Enter to continue...")
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
 }
 
 func setPublicKey(publicKeyPath string) error {
