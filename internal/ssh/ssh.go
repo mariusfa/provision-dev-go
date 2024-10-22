@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"provision/internal/utils/commandrunner"
 )
 
@@ -32,6 +33,7 @@ func SetupSSH() error {
 
 	fmt.Println("Public SSH Key:")
 	fmt.Println(publicKey)
+	enterToCopySshKey()
 	enterToContinue()
 
 	return nil
@@ -57,8 +59,39 @@ func generateSshKey(email string) error {
 	return nil
 }
 
+func enterToCopySshKey() {
+	fmt.Print("Copy ssh key and setup in github before continuing. Press Enter to copy ssh key")
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
+
+	cmd := exec.Command("xclip", "-selection", "clipboard")
+
+	stdin, err := cmd.StdinPipe()
+	if err != nil {
+		fmt.Println("Error getting StdinPipe:", err)
+		return
+	}
+
+	if err := cmd.Start(); err != nil {
+		fmt.Println("Error starting command:", err)
+		return
+	}
+
+	_, err = stdin.Write([]byte(publicKey))
+	if err != nil {
+		fmt.Println("Error writing to stdin:", err)
+		return
+	}
+
+	stdin.Close()
+
+	if err := cmd.Wait(); err != nil {
+		fmt.Println("Error waiting for command:", err)
+		return
+	}
+}
+
 func enterToContinue() {
-	fmt.Print("Copy ssh key and setup in github before continuing. Press Enter to continue...")
+	fmt.Print("Press Enter to continue provisioning...")
 	bufio.NewReader(os.Stdin).ReadBytes('\n')
 }
 
