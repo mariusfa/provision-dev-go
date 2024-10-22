@@ -29,3 +29,28 @@ func TestSetupAliasNoAliases(t *testing.T) {
 		t.Errorf("Expected 'alias ..='cd ..'', got %v", aliasesWritten[0])
 	}
 }
+
+func TestSetupAliasAlreadyInserted(t *testing.T) {
+	aliasesWritten := []string{}
+	writeAliases = func(aliases []string) error {
+		aliasesWritten = aliases
+		return nil
+	}
+	getAliasesFromBash = func() ([]string, error) {
+		return []string{
+			"alias ..='cd ..'",
+		}, nil
+	}
+	getAliasesFromAliasFile = func() ([]string, error) {
+		return []string{
+			"alias ..='cd ..'",
+		}, nil
+	}
+	err := SetupAlias()
+	if err != nil {
+		t.Errorf("Expected nil, got %v", err)
+	}
+	if len(aliasesWritten) != 0 {
+		t.Errorf("Expected 0, got %v", len(aliasesWritten))
+	}
+}
