@@ -30,6 +30,8 @@ func main() {
 		runGit()
 	case cliparser.ALIAS:
 		runAlias()
+	case cliparser.NEOVIM:
+		runNeovim()
 	default:
 		fmt.Println("Invalid option")
 	}

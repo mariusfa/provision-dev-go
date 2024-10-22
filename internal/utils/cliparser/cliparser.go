@@ -12,6 +12,7 @@ const (
 	SSH
 	GIT
 	ALIAS
+	NEOVIM
 	UNKNOWN
 )
 
@@ -39,6 +40,8 @@ func CliParser() (SubPackage, error) {
 		return GIT, nil
 	case "alias":
 		return ALIAS, nil
+	case "neovim":
+		return NEOVIM, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")
