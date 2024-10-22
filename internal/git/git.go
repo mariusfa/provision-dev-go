@@ -7,8 +7,6 @@ import (
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
-// TODO: set default git editor to neovim
-
 // Assume git is installed. Hence ubuntu
 func SetupGit() error {
 	isSet := isGitConfigSet()
@@ -62,6 +60,9 @@ var setGitConfig = func(username, email string) error {
 		return err
 	}
 	if err := runner.Run("git", "config", "--global", "user.email", email); err != nil {
+		return err
+	}
+	if err := runner.Run("git", "config", "--global", "core.editor", "neovim"); err != nil {
 		return err
 	}
 	return nil

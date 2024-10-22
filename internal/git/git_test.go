@@ -19,5 +19,4 @@ func TestGitSetup(t *testing.T) {
 	if err != nil {
 		t.Errorf("Expected nil, got %v", err)
 	}
-	t.Skip("Not implemented yet")
 }
