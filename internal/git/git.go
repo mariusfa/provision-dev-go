@@ -7,6 +7,8 @@ import (
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
+// TODO: set default git editor to neovim
+
 // Assume git is installed. Hence ubuntu
 func SetupGit() error {
 	isSet := isGitConfigSet()
