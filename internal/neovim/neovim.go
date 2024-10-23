@@ -10,7 +10,6 @@ var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 var neovimPath = os.Getenv("HOME") + "/.config/nvim"
 
 func SetupNeovim() error {
-	println("Checking neovim folder")
 	println(isNeovimInstalled())
 	return nil
 }

@@ -23,4 +23,7 @@ func TestSetupNeovim(t *testing.T) {
 	installNeovim = func() error {
 		return nil
 	}
+	if err := SetupNeovim(); err != nil {
+		t.Errorf("Expected nil, got %v", err)
+	}
 }
