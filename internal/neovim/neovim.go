@@ -1,16 +1,25 @@
 package neovim
 
-import "provision/internal/utils/commandrunner"
+import (
+	"os"
+	"provision/internal/utils/commandrunner"
+)
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
+var neovimPath = os.Getenv("HOME") + "/.config/nvim"
+
 func SetupNeovim() error {
-	// TODO: Implement
+	println("Checking neovim folder")
+	println(isNeovimInstalled())
 	return nil
 }
 
 var isNeovimInstalled = func() bool {
-	// TODO: Implement
+	info, err := os.Stat(neovimPath)
+	if os.IsNotExist(err) || !info.IsDir() {
+		return false
+	}
 	return true
 }
 
