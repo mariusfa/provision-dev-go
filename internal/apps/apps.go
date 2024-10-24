@@ -1,16 +1,32 @@
 package apps
 
+import "os"
+
+var appsPath = os.Getenv("HOME") + "/apps/bin"
+
 func SetupApps() error {
-	// TODO: Implement
-	// check if home/apps/bin exists else create folder(s)
-	// check if apps/bin are in path, else add to path
+	if !folderExists() {
+		if err := createFolder(); err != nil {
+			return err
+		}
+		updateBashRc()
+	}
 	return nil
 }
 
 var folderExists = func() bool {
-	return false
+	info, err := os.Stat(appsPath)
+	if os.IsNotExist(err) || !info.IsDir() {
+		return false
+	}
+	return true
 }
 
 var updateBashRc = func() error {
+	// TODO: Implement
 	return nil
+}
+
+var createFolder = func() error {
+	return os.MkdirAll(appsPath, os.ModePerm)
 }
