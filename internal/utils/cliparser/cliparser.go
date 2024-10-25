@@ -39,6 +39,8 @@ func CliParser() (SubPackage, error) {
 		return SSH, nil
 	case "git":
 		return GIT, nil
+	case "apps":
+		return APPS, nil
 	case "alias":
 		return ALIAS, nil
 	case "neovim":
