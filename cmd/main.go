@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"provision/internal/alias"
+	"provision/internal/apps"
 	"provision/internal/git"
 	"provision/internal/neovim"
 	"provision/internal/ssh"
@@ -74,6 +75,14 @@ func runGit() {
 	err := git.SetupGit()
 	if err != nil {
 		log.Fatalf("Error setting up Git: %v\n", err)
+	}
+}
+
+func runApps() {
+	println("Running Apps setup")
+	err := apps.SetupApps()
+	if err != nil {
+		log.Fatalf("Error setting up Apps: %v\n", err)
 	}
 }
 
