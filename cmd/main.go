@@ -29,6 +29,8 @@ func main() {
 		runSsh()
 	case cliparser.GIT:
 		runGit()
+	case cliparser.APPS:
+		runApps()
 	case cliparser.ALIAS:
 		runAlias()
 	case cliparser.NEOVIM:
