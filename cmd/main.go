@@ -58,6 +58,7 @@ func runAll() {
 	println("Running all")
 	runSsh()
 	runGit()
+	runApps()
 	runAlias()
 	runNeovim()
 }
