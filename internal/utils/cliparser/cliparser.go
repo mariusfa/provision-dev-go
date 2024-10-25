@@ -11,6 +11,7 @@ const (
 	ALL SubPackage = iota
 	SSH
 	GIT
+	APPS
 	ALIAS
 	NEOVIM
 	UNKNOWN
