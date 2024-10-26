@@ -7,7 +7,7 @@ import (
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
-var neovimPath = os.Getenv("HOME") + "/.config/nvim"
+var neovimConfigPath = os.Getenv("HOME") + "/.config/nvim"
 
 func SetupNeovim() error {
 	println(isNeovimInstalled())
@@ -15,14 +15,21 @@ func SetupNeovim() error {
 }
 
 var isNeovimInstalled = func() bool {
-	info, err := os.Stat(neovimPath)
+	info, err := os.Stat(neovimConfigPath)
 	if os.IsNotExist(err) || !info.IsDir() {
 		return false
 	}
 	return true
 }
 
+// Download link
+// https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 var installNeovim = func() error {
 	// TODO: Implement
+	// Download
+	// Extract
+	// Put in home/apps/
+	// Create symlink from home/apps/nvim-linux64/bin/nvim to home/apps/bin/nvim
+
 	return nil
 }
