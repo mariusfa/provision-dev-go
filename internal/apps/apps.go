@@ -45,5 +45,6 @@ var updateBashRc = func() error {
 }
 
 var createFolder = func() error {
+	println("Creating apps folder")
 	return os.MkdirAll(appsPath, os.ModePerm)
 }
