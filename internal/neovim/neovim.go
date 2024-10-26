@@ -22,15 +22,18 @@ var isNeovimInstalled = func() bool {
 	return true
 }
 
-// Download link
-// https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 var installNeovim = func() error {
-	// TODO: Implement
-	// Download
-	// Extract
-	// Put in home/apps/
-	// Create symlink from home/apps/nvim-linux64/bin/nvim to home/apps/bin/nvim
-	//  Delete the downloaded file
-
+	if err := runner.Run("wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"); err != nil {
+		return err
+	}
+	if err := runner.Run("tar -xvf nvim-linux64.tar.gz -C ~/apps"); err != nil {
+		return err
+	}
+	if err := runner.Run("ln -s ~/apps/nvim-linux64/bin/nvim ~/apps/bin/nvim"); err != nil {
+		return err
+	}
+	if err := runner.Run("rm nvim-linux64.tar.gz"); err != nil {
+		return err
+	}
 	return nil
 }
