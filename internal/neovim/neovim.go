@@ -30,6 +30,7 @@ var installNeovim = func() error {
 	// Extract
 	// Put in home/apps/
 	// Create symlink from home/apps/nvim-linux64/bin/nvim to home/apps/bin/nvim
+	//  Delete the downloaded file
 
 	return nil
 }
