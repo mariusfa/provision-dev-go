@@ -17,13 +17,19 @@ func newFakeRunner() *fakeRunner {
 }
 
 func TestSetupNeovim(t *testing.T) {
+	neovimInstall := false
 	isNeovimInstalled = func() bool {
-		return false
+		return neovimInstall
 	}
 	installNeovim = func() error {
+		neovimInstall = true
 		return nil
 	}
 	if err := SetupNeovim(); err != nil {
 		t.Errorf("Expected nil, got %v", err)
+	}
+
+	if neovimInstall == false {
+		t.Errorf("Expected neovimInstall to be true, got false")
 	}
 }
