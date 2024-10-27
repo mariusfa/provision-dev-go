@@ -14,6 +14,7 @@ func SetupNeovim() error {
 	return nil
 }
 
+// TODO: Change to check for bin file in apps folder
 var isNeovimInstalled = func() bool {
 	info, err := os.Stat(neovimConfigPath)
 	if os.IsNotExist(err) || !info.IsDir() {
