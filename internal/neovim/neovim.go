@@ -10,7 +10,14 @@ var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 var neovimConfigPath = os.Getenv("HOME") + "/.config/nvim"
 
 func SetupNeovim() error {
-	println(isNeovimInstalled())
+	if isNeovimInstalled() {
+		println("Neovim is already installed")
+	}
+
+	if err := installNeovim(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
