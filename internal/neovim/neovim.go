@@ -18,6 +18,8 @@ func SetupNeovim() error {
 		return err
 	}
 
+	println("Neovim installed")
+
 	return nil
 }
 
