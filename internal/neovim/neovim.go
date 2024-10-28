@@ -37,7 +37,8 @@ var installNeovim = func() error {
 	if err := runner.Run("wget", "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"); err != nil {
 		return fmt.Errorf("error downloading neovim: %w", err)
 	}
-	if err := runner.Run("tar", "-xvf", "nvim-linux64.tar.gz", "-C", "~/apps"); err != nil {
+	appsFolder := os.Getenv("HOME") + "/apps"
+	if err := runner.Run("tar", "-xvf", "nvim-linux64.tar.gz", "-C", appsFolder); err != nil {
 		return fmt.Errorf("error extracting neovim: %w", err)
 	}
 	if err := runner.Run("ln", "-s", "~/apps/nvim-linux64/bin/nvim", "~/apps/bin/nvim"); err != nil {
