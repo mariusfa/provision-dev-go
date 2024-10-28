@@ -1,6 +1,7 @@
 package neovim
 
 import (
+	"fmt"
 	"os"
 	"provision/internal/utils/commandrunner"
 )
@@ -34,16 +35,16 @@ var isNeovimInstalled = func() bool {
 
 var installNeovim = func() error {
 	if err := runner.Run("wget", "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"); err != nil {
-		return err
+		return fmt.Errorf("error downloading neovim: %w", err)
 	}
 	if err := runner.Run("tar", "-xvf", "nvim-linux64.tar.gz", "-C", "~/apps"); err != nil {
-		return err
+		return fmt.Errorf("error extracting neovim: %w", err)
 	}
 	if err := runner.Run("ln", "-s", "~/apps/nvim-linux64/bin/nvim", "~/apps/bin/nvim"); err != nil {
-		return err
+		return fmt.Errorf("error linking neovim: %w", err)
 	}
 	if err := runner.Run("rm", "nvim-linux64.tar.gz"); err != nil {
-		return err
+		return fmt.Errorf("error removing neovim tar: %w", err)
 	}
 	return nil
 }
