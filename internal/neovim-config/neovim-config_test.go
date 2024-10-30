@@ -26,3 +26,24 @@ func TestNeovimConfig(t *testing.T) {
 		t.Errorf("NeovimConfig() failed: cloneNeovimConfig() not called")
 	}
 }
+
+func TestNeovimConfigAlreadyCloned(t *testing.T) {
+	isNeovimConfigClonedResult := true
+	isCloneNeovimConfigCalled := false
+	neovimConfigExists = func() bool {
+		return isNeovimConfigClonedResult
+	}
+	cloneNeovimConfig = func() error {
+		isCloneNeovimConfigCalled = true
+		return nil
+	}
+	if err := SetupNeovimConfig(); err != nil {
+		t.Errorf("NeovimConfig() failed: %v", err)
+	}
+	if !isNeovimConfigClonedResult {
+		t.Errorf("NeovimConfig() failed: Neovim config not cloned")
+	}
+	if isCloneNeovimConfigCalled {
+		t.Errorf("NeovimConfig() failed: cloneNeovimConfig() called")
+	}
+}
