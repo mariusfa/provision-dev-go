@@ -12,8 +12,11 @@ func SetupNeovimConfig() error {
 }
 
 var neovimConfigExists = func() bool {
-	// TODO: Implement
-	return false
+	info, err := os.Stat(neovimConfigPath)
+	if os.IsNotExist(err) || !info.IsDir() {
+		return false
+	}
+	return true
 }
 
 var cloneNeovimConfig = func() error {
