@@ -1,6 +1,7 @@
 package neovimconfig
 
 import (
+	"fmt"
 	"os"
 	"provision/internal/utils/commandrunner"
 )
@@ -25,6 +26,8 @@ var neovimConfigExists = func() bool {
 }
 
 var cloneNeovimConfig = func() error {
-	// TODO: Implement
+	if err := runner.Run("git", "clone", githubNeovimConfigURL, neovimConfigPath); err != nil {
+		return fmt.Errorf("error cloning neovim config: %w", err)
+	}
 	return nil
 }
