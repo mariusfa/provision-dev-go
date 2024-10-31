@@ -1,6 +1,10 @@
 package neovimconfig
 
+import "os"
+
 const githubNeovimConfigURL = "git@github.com:mariusfa/lzy-vim-starter.git"
+
+var neovimConfigPath = os.Getenv("HOME") + "/.config/nvim"
 
 func SetupNeovimConfig() error {
 	// TODO: Implement
