@@ -13,6 +13,7 @@ var neovimConfigPath = os.Getenv("HOME") + "/.config/nvim"
 func SetupNeovim() error {
 	if isNeovimInstalled() {
 		println("Neovim is already installed")
+		return nil
 	}
 
 	if err := installNeovim(); err != nil {
