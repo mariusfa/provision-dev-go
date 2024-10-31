@@ -1,10 +1,15 @@
 package neovimconfig
 
-import "os"
+import (
+	"os"
+	"provision/internal/utils/commandrunner"
+)
 
 const githubNeovimConfigURL = "git@github.com:mariusfa/lzy-vim-starter.git"
 
 var neovimConfigPath = os.Getenv("HOME") + "/.config/nvim"
+
+var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
 func SetupNeovimConfig() error {
 	// TODO: Implement
