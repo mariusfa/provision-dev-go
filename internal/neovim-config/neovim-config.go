@@ -1,5 +1,7 @@
 package neovimconfig
 
+const githubNeovimConfigURL = "git@github.com:mariusfa/lzy-vim-starter.git"
+
 func SetupNeovimConfig() error {
 	// TODO: Implement
 	return nil
