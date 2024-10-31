@@ -17,6 +17,12 @@ func SetupNeovimConfig() error {
 		println("Neovim config already exists")
 		return nil
 	}
+
+	if err := cloneNeovimConfig(); err != nil {
+		return err
+	}
+
+	println("Neovim config cloned")
 	return nil
 }
 
