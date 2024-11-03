@@ -38,6 +38,8 @@ func main() {
 		runAlias()
 	case cliparser.NEOVIM:
 		runNeovim()
+	case cliparser.NEOVIM_CONFIG:
+		runNeovimConfig()
 	default:
 		fmt.Println("Invalid option")
 	}
