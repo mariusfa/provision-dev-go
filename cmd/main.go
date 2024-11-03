@@ -7,6 +7,7 @@ import (
 	"provision/internal/apps"
 	"provision/internal/git"
 	"provision/internal/neovim"
+	neovimconfig "provision/internal/neovim-config"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
 )
@@ -102,5 +103,13 @@ func runNeovim() {
 	err := neovim.SetupNeovim()
 	if err != nil {
 		log.Fatalf("Error setting up Neovim: %v\n", err)
+	}
+}
+
+func runNeovimConfig() {
+	println("Running Neovim config setup")
+	err := neovimconfig.SetupNeovimConfig()
+	if err != nil {
+		log.Fatalf("Error setting up Neovim config: %v\n", err)
 	}
 }
