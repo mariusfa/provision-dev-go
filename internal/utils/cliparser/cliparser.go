@@ -14,6 +14,7 @@ const (
 	APPS
 	ALIAS
 	NEOVIM
+	NEOVIM_CONFIG
 	UNKNOWN
 )
 
@@ -45,6 +46,8 @@ func CliParser() (SubPackage, error) {
 		return ALIAS, nil
 	case "neovim":
 		return NEOVIM, nil
+	case "neovim-config":
+		return NEOVIM_CONFIG, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")
