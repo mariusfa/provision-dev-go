@@ -13,6 +13,8 @@ import (
 )
 
 // TODO: create a custom print util to print with colors and icons
+// TODO: add xclip install
+// TODO: add help command to print all sub commands
 
 func main() {
 	printInitializationBanner()
