@@ -64,6 +64,7 @@ func runAll() {
 	runApps()
 	runAlias()
 	runNeovim()
+	runNeovimConfig()
 }
 
 func runSsh() {
