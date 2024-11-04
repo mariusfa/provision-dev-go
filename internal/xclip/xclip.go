@@ -2,6 +2,7 @@ package xclip
 
 func SetupXclip() error {
 	// TODO: add xclip install, sudo apt install xclip
+	println(isXclipInstalled())
 	return nil
 }
 
