@@ -17,4 +17,8 @@ func TestSetupXclip(t *testing.T) {
 	if err := SetupXclip(); err != nil {
 		t.Errorf("SetupXclip() = %v; want nil", err)
 	}
+
+	if !xclipInstalled {
+		t.Error("xclip not installed")
+	}
 }
