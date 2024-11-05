@@ -1,5 +1,9 @@
 package xclip
 
+import "provision/internal/utils/commandrunner"
+
+var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
+
 func SetupXclip() error {
 	// TODO: add xclip install, sudo apt install xclip
 	println(isXclipInstalled())
@@ -7,8 +11,10 @@ func SetupXclip() error {
 }
 
 var isXclipInstalled = func() bool {
-	// TODO: impl
-	return false
+	if err := runner.Run("xclip", "-version"); err != nil {
+		return false
+	}
+	return true
 }
 
 var installXclip = func() error {
