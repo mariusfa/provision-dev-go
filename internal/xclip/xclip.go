@@ -5,8 +5,16 @@ import "provision/internal/utils/commandrunner"
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
 func SetupXclip() error {
-	// TODO: add xclip install, sudo apt install xclip
-	println(isXclipInstalled())
+	if isXclipInstalled() {
+		println("xclip is already installed")
+		return nil
+	}
+
+	if err := installXclip(); err != nil {
+		return err
+	}
+
+	println("xclip installed")
 	return nil
 }
 
@@ -18,6 +26,8 @@ var isXclipInstalled = func() bool {
 }
 
 var installXclip = func() error {
-	// TODO: impl
+	if err := runner.Run("sudo", "apt", "install", "xclip"); err != nil {
+		return err
+	}
 	return nil
 }
