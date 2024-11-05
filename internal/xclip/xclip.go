@@ -26,7 +26,7 @@ var isXclipInstalled = func() bool {
 }
 
 var installXclip = func() error {
-	if err := runner.Run("apt", "install", "xclip"); err != nil {
+	if err := runner.Run("sudo", "apt", "install", "xclip", "-y"); err != nil {
 		return err
 	}
 	return nil
