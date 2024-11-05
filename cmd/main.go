@@ -10,6 +10,7 @@ import (
 	neovimconfig "provision/internal/neovim-config"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
+	"provision/internal/xclip"
 )
 
 // TODO: create a custom print util to print with colors and icons
@@ -29,6 +30,8 @@ func main() {
 	switch cliOptions {
 	case cliparser.ALL:
 		runAll()
+	case cliparser.XCLIP:
+		runXclip()
 	case cliparser.SSH:
 		runSsh()
 	case cliparser.GIT:
@@ -64,12 +67,20 @@ func printRememberSourceProfile() {
 
 func runAll() {
 	println("Running all")
+	runXclip()
 	runSsh()
 	runGit()
 	runApps()
 	runAlias()
 	runNeovim()
 	runNeovimConfig()
+}
+
+func runXclip() {
+	println("Running Xclip setup")
+	if err := xclip.SetupXclip(); err != nil {
+		log.Fatalf("Error setting up Xclip: %v\n", err)
+	}
 }
 
 func runSsh() {
