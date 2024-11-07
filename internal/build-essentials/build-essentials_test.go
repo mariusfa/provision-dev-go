@@ -5,11 +5,11 @@ import "testing"
 func TestBuildEssentials(t *testing.T) {
 	beInstalled := false
 
-	isBuildEssentialsInstalled := func() bool {
+	isBuildEssentialsInstalled = func() bool {
 		return beInstalled
 	}
 
-	installBuildEssentials := func() error {
+	installBuildEssentials = func() error {
 		beInstalled = true
 		return nil
 	}
