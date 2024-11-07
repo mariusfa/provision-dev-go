@@ -5,6 +5,7 @@ import (
 	"log"
 	"provision/internal/alias"
 	"provision/internal/apps"
+	buildessentials "provision/internal/build-essentials"
 	"provision/internal/git"
 	"provision/internal/neovim"
 	neovimconfig "provision/internal/neovim-config"
@@ -68,6 +69,7 @@ func printRememberSourceProfile() {
 func runAll() {
 	println("Running all")
 	runXclip()
+	runBuildEssentials()
 	runSsh()
 	runGit()
 	runApps()
@@ -80,6 +82,13 @@ func runXclip() {
 	println("Running Xclip setup")
 	if err := xclip.SetupXclip(); err != nil {
 		log.Fatalf("Error setting up Xclip: %v\n", err)
+	}
+}
+
+func runBuildEssentials() {
+	println("Running Build Essentials setup")
+	if err := buildessentials.SetupBuildEssentials(); err != nil {
+		log.Fatalf("Error setting up Build Essentials: %v\n", err)
 	}
 }
 
