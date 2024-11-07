@@ -33,6 +33,8 @@ func main() {
 		runAll()
 	case cliparser.XCLIP:
 		runXclip()
+	case cliparser.BUILD_ESSENTIALS:
+		runBuildEssentials()
 	case cliparser.SSH:
 		runSsh()
 	case cliparser.GIT:
