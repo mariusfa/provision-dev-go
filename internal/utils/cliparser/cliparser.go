@@ -16,6 +16,7 @@ const (
 	ALIAS
 	NEOVIM
 	NEOVIM_CONFIG
+	BUILD_ESSENTIALS
 	UNKNOWN
 )
 
@@ -51,6 +52,8 @@ func CliParser() (SubPackage, error) {
 		return NEOVIM, nil
 	case "neovim-config":
 		return NEOVIM_CONFIG, nil
+	case "build-essentials":
+		return BUILD_ESSENTIALS, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")
