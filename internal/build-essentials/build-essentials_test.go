@@ -17,4 +17,8 @@ func TestBuildEssentials(t *testing.T) {
 	if err := SetupBuildEssentials(); err != nil {
 		t.Errorf("SetupBuildEssentials() failed: %v", err)
 	}
+
+	if !beInstalled {
+		t.Errorf("SetupBuildEssentials() failed: build essentials not installed")
+	}
 }
