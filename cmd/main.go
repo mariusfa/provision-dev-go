@@ -5,7 +5,7 @@ import (
 	"log"
 	"provision/internal/alias"
 	"provision/internal/apps"
-	buildessentials "provision/internal/build-essentials"
+	"provision/internal/gcc"
 	"provision/internal/git"
 	"provision/internal/neovim"
 	neovimconfig "provision/internal/neovim-config"
@@ -33,8 +33,8 @@ func main() {
 		runAll()
 	case cliparser.XCLIP:
 		runXclip()
-	case cliparser.BUILD_ESSENTIALS:
-		runBuildEssentials()
+	case cliparser.GCC:
+		runGcc()
 	case cliparser.SSH:
 		runSsh()
 	case cliparser.GIT:
@@ -71,7 +71,7 @@ func printRememberSourceProfile() {
 func runAll() {
 	println("Running all")
 	runXclip()
-	runBuildEssentials()
+	runGcc()
 	runSsh()
 	runGit()
 	runApps()
@@ -87,10 +87,10 @@ func runXclip() {
 	}
 }
 
-func runBuildEssentials() {
-	println("Running Build Essentials setup")
-	if err := buildessentials.SetupBuildEssentials(); err != nil {
-		log.Fatalf("Error setting up Build Essentials: %v\n", err)
+func runGcc() {
+	println("Running Gcc setup")
+	if err := gcc.SetupGcc(); err != nil {
+		log.Fatalf("Error setting up Gcc: %v\n", err)
 	}
 }
 

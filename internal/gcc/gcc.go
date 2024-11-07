@@ -1,23 +1,23 @@
-package buildessentials
+package gcc
 
 import "provision/internal/utils/commandrunner"
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
-func SetupBuildEssentials() error {
+func SetupGcc() error {
 	// TODO: impl
-	println(isBuildEssentialsInstalled())
+	println(isGccInstalled())
 	return nil
 }
 
-var isBuildEssentialsInstalled = func() bool {
+var isGccInstalled = func() bool {
 	if err := runner.Run("gcc", "--version"); err != nil {
 		return false
 	}
 	return true
 }
 
-var installBuildEssentials = func() error {
+var installGcc = func() error {
 	if err := runner.Run("sudo", "apt", "install", "gcc", "-y"); err != nil {
 		return err
 	}
