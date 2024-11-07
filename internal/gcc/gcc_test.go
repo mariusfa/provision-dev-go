@@ -2,7 +2,7 @@ package gcc
 
 import "testing"
 
-func TestBuildEssentials(t *testing.T) {
+func TestSetupGcc(t *testing.T) {
 	gccInstalled := false
 
 	isGccInstalled = func() bool {
