@@ -18,6 +18,8 @@ var isBuildEssentialsInstalled = func() bool {
 }
 
 var installBuildEssentials = func() error {
-	// TODO: impl
+	if err := runner.Run("sudo", "apt", "install", "gcc", "-y"); err != nil {
+		return err
+	}
 	return nil
 }
