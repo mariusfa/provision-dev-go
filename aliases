@@ -1,6 +1,7 @@
 alias ..='cd ..'
 alias gaa='git add --all'
 alias gst='git status'
+alias gc='git commit --verbose'
 alias gcan!='git commit --verbose --all --no-edit --amend'
 alias gl='git pull'
 alias gp='git push'
