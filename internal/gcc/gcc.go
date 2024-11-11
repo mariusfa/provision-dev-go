@@ -5,8 +5,16 @@ import "provision/internal/utils/commandrunner"
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
 func SetupGcc() error {
-	// TODO: impl
-	println(isGccInstalled())
+	if isGccInstalled() {
+		println("gcc is already installed")
+		return nil
+	}
+
+	if err := installGcc(); err != nil {
+		return err
+	}
+
+	println("gcc installed")
 	return nil
 }
 
