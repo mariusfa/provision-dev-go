@@ -73,6 +73,7 @@ func printRememberSourceProfile() {
 func runAll() {
 	println("Running all")
 	runXclip()
+	runRipgrep()
 	runGcc()
 	runSsh()
 	runGit()
