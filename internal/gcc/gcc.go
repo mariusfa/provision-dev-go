@@ -4,6 +4,7 @@ import "provision/internal/utils/commandrunner"
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
+// Required for neovim
 func SetupGcc() error {
 	if isGccInstalled() {
 		println("gcc is already installed")

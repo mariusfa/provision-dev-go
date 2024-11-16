@@ -7,6 +7,7 @@ import (
 
 var appsPath = os.Getenv("HOME") + "/apps/bin"
 
+// Required for neovim install location
 func SetupApps() error {
 	if !folderExists() {
 		if err := createFolder(); err != nil {

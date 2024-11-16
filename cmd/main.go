@@ -15,8 +15,8 @@ import (
 )
 
 // TODO: create a custom print util to print with colors and icons
-// TODO: add c compiler for neovim, sudo apt install build-essential
 // TODO: add fzf install, sudo apt install fzf
+// TODO install ripgrep
 // TODO: add help command to print all sub commands
 
 func main() {
