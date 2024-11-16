@@ -10,6 +10,7 @@ type SubPackage int
 const (
 	ALL SubPackage = iota
 	XCLIP
+	RIPGREP
 	SSH
 	GIT
 	APPS
@@ -40,6 +41,8 @@ func CliParser() (SubPackage, error) {
 	switch command {
 	case "xclip":
 		return XCLIP, nil
+	case "ripgrep":
+		return RIPGREP, nil
 	case "ssh":
 		return SSH, nil
 	case "git":
