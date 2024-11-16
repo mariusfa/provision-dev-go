@@ -42,6 +42,7 @@ var updateBashRc = func() error {
 	if _, err := file.WriteString(bashrcString); err != nil {
 		return fmt.Errorf("failed to write alias to file: %w", err)
 	}
+	file.WriteString("\n")
 	return nil
 }
 
