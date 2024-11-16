@@ -9,6 +9,7 @@ import (
 	"provision/internal/git"
 	"provision/internal/neovim"
 	neovimconfig "provision/internal/neovim-config"
+	"provision/internal/ripgrep"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
 	"provision/internal/xclip"
@@ -16,7 +17,6 @@ import (
 
 // TODO: create a custom print util to print with colors and icons
 // TODO: add fzf install, sudo apt install fzf
-// TODO install ripgrep
 // TODO: add help command to print all sub commands
 
 func main() {
@@ -33,6 +33,8 @@ func main() {
 		runAll()
 	case cliparser.XCLIP:
 		runXclip()
+	case cliparser.RIPGREP:
+		runRipgrep()
 	case cliparser.GCC:
 		runGcc()
 	case cliparser.SSH:
@@ -84,6 +86,13 @@ func runXclip() {
 	println("Running Xclip setup")
 	if err := xclip.SetupXclip(); err != nil {
 		log.Fatalf("Error setting up Xclip: %v\n", err)
+	}
+}
+
+func runRipgrep() {
+	println("Running ripgrep setup")
+	if err := ripgrep.SetupRipgrep(); err != nil {
+		log.Fatalf("Error setting up ripgrep: %v\n", err)
 	}
 }
 
