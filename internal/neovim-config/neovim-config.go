@@ -6,7 +6,7 @@ import (
 	"provision/internal/utils/commandrunner"
 )
 
-const githubNeovimConfigURL = "git@github.com:mariusfa/lzy-vim-starter.git"
+const githubNeovimConfigURL = "git@github.com:mariusfa/pvim.git"
 
 var neovimConfigPath = os.Getenv("HOME") + "/.config/nvim"
 
