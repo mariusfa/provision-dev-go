@@ -36,11 +36,11 @@ function install_go {
 }
 
 function run_go_project {
-  if [ -f "cmd/main.go" ]; then
-    echo "Running Go project from cmd/main.go"
-    go run cmd/main.go
+  if [ -f "main.go" ]; then
+    echo "Running Go project from main.go"
+    go run main.go
   else
-    echo "cmd/main.go does not exist."
+    echo "main.go does not exist."
     exit 1
   fi
 }
