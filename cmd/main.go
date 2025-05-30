@@ -18,6 +18,7 @@ import (
 
 // TODO: create a custom print util to print with colors and icons
 // TODO: add fzf install, sudo apt install fzf
+// TODO: add unzip install, sudo apt install unzip
 // TODO: add help command to print all sub commands
 
 func main() {
