@@ -25,7 +25,7 @@ func SetupNeovim() error {
 	return nil
 }
 
-// TODO: Change to check for bin file in apps folder
+// TODO: Check for nvm --version
 var isNeovimInstalled = func() bool {
 	info, err := os.Stat(neovimConfigPath)
 	if os.IsNotExist(err) || !info.IsDir() {
@@ -60,7 +60,7 @@ func download() error {
 
 func extract() error {
 	println("Extracting neovim")
-	
+
 	appsPath := os.Getenv("HOME") + "/apps"
 	fmt.Printf("Extracting to neovim to: %s\n", appsPath)
 	if err := runner.Run("tar", "-xvf", "nvim-linux-x86_64.tar.gz", "-C", appsPath); err != nil {

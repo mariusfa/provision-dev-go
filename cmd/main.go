@@ -9,6 +9,7 @@ import (
 	"provision/internal/git"
 	"provision/internal/neovim"
 	neovimconfig "provision/internal/neovim-config"
+	"provision/internal/node"
 	"provision/internal/ripgrep"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
@@ -49,6 +50,8 @@ func main() {
 		runNeovim()
 	case cliparser.NEOVIM_CONFIG:
 		runNeovimConfig()
+	case cliparser.NODE:
+		runNode()
 	default:
 		fmt.Println("Invalid option")
 	}
@@ -150,4 +153,13 @@ func runNeovimConfig() {
 	if err != nil {
 		log.Fatalf("Error setting up Neovim config: %v\n", err)
 	}
+}
+
+func runNode() {
+	println("Running Nodejs setup")
+	err := node.SetupNode()
+	if err != nil {
+		log.Fatalf("Error setting up Nodejs: %v\n", err)
+	}
+
 }

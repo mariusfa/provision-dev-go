@@ -18,6 +18,7 @@ const (
 	NEOVIM
 	NEOVIM_CONFIG
 	GCC
+	NODE
 	UNKNOWN
 )
 
@@ -57,6 +58,8 @@ func CliParser() (SubPackage, error) {
 		return NEOVIM_CONFIG, nil
 	case "gcc":
 		return GCC, nil
+	case "node":
+		return NODE, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")
