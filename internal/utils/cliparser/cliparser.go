@@ -9,6 +9,7 @@ type SubPackage int
 
 const (
 	ALL SubPackage = iota
+	NEOVIM_REQ
 	XCLIP
 	RIPGREP
 	SSH
@@ -60,6 +61,8 @@ func CliParser() (SubPackage, error) {
 		return GCC, nil
 	case "node":
 		return NODE, nil
+	case "neovim-req":
+		return NEOVIM_REQ, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")

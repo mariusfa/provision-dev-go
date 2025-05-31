@@ -19,8 +19,10 @@ func InstallPackage(packageName string) error {
 }
 
 func isPackageInstalled(packageName string) bool {
-	if err := runner.Run(packageName, "--version"); err != nil {
-		return false
+	errUsualVersion := runner.Run(packageName, "--version")
+	errAlternativeVersion := runner.Run(packageName, "-version")
+	if errUsualVersion == nil || errAlternativeVersion == nil {
+		return true
 	}
-	return true
+	return false
 }
