@@ -31,9 +31,8 @@ func newFakeRunner() *fakeRunner {
 
 func TestAptInstaller(t *testing.T) {
 	fakeCommandRunner := newFakeRunner()
-	aptInstaller := NewAptInstaller()
-	aptInstaller.commandRunner = fakeCommandRunner
-	if err := aptInstaller.InstallPackage("curl"); err != nil {
+	runner = fakeCommandRunner
+	if err := InstallPackage("curl"); err != nil {
 		t.Errorf("InstallPackage() failed: %v", err)
 	}
 
