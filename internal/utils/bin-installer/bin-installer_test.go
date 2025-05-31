@@ -10,10 +10,11 @@ type fakeRunner struct {
 }
 
 func (f *fakeRunner) Run(name string, arg ...string) error {
-	if name == "curl" && arg[0] == "--version" && f.IsInstalled {
+	if name == "nvim" && arg[0] == "--version" && f.IsInstalled {
 		return nil
 	}
-	if name == "sudo" && arg[0] == "apt" && arg[1] == "install" && arg[2] == "-y" && arg[3] == "curl" {
+
+	if name == "wget" && arg[0] == "https://fake-download-url.com" {
 		f.IsInstalled = true
 		return nil
 	}
@@ -30,7 +31,14 @@ func newFakeRunner() *fakeRunner {
 }
 
 func TestBinInstaller(t *testing.T) {
-	// This function is intentionally left empty.
-	// It serves as a placeholder for future tests related to the bininstaller package.
-	// Currently, there are no tests implemented.
+	fakeCommandRunner := newFakeRunner()
+	runner = fakeCommandRunner
+
+	if err := InstallPackage("nvim", "https://fake-download-url.com"); err != nil {
+		t.Errorf("InstallPackage() failed: %v", err)
+	}
+	if !fakeCommandRunner.IsInstalled {
+		t.Error("Package 'nvim' was not installed as expected")
+	}
+
 }
