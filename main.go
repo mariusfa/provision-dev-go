@@ -5,20 +5,16 @@ import (
 	"log"
 	"provision/internal/alias"
 	"provision/internal/apps"
-	"provision/internal/gcc"
 	"provision/internal/git"
 	"provision/internal/neovim"
 	neovimconfig "provision/internal/neovim-config"
+	neovimreq "provision/internal/neovim-req"
 	"provision/internal/node"
-	"provision/internal/ripgrep"
 	"provision/internal/ssh"
 	"provision/internal/utils/cliparser"
-	"provision/internal/xclip"
 )
 
 // TODO: create a custom print util to print with colors and icons
-// TODO: add fzf install, sudo apt install fzf
-// TODO: add unzip install, sudo apt install unzip
 // TODO: add help command to print all sub commands
 
 func main() {
@@ -33,12 +29,6 @@ func main() {
 	switch cliOptions {
 	case cliparser.ALL:
 		runAll()
-	case cliparser.XCLIP:
-		runXclip()
-	case cliparser.RIPGREP:
-		runRipgrep()
-	case cliparser.GCC:
-		runGcc()
 	case cliparser.SSH:
 		runSsh()
 	case cliparser.GIT:
@@ -53,6 +43,8 @@ func main() {
 		runNeovimConfig()
 	case cliparser.NODE:
 		runNode()
+	case cliparser.NEOVIM_REQ:
+		runNeovimRequirements()
 	default:
 		fmt.Println("Invalid option")
 	}
@@ -76,36 +68,14 @@ func printRememberSourceProfile() {
 
 func runAll() {
 	println("Running all")
-	runXclip()
-	runRipgrep()
-	runGcc()
+	runNeovimRequirements()
+	runNode()
 	runSsh()
 	runGit()
 	runApps()
 	runAlias()
 	runNeovim()
 	runNeovimConfig()
-}
-
-func runXclip() {
-	println("Running Xclip setup")
-	if err := xclip.SetupXclip(); err != nil {
-		log.Fatalf("Error setting up Xclip: %v\n", err)
-	}
-}
-
-func runRipgrep() {
-	println("Running ripgrep setup")
-	if err := ripgrep.SetupRipgrep(); err != nil {
-		log.Fatalf("Error setting up ripgrep: %v\n", err)
-	}
-}
-
-func runGcc() {
-	println("Running Gcc setup")
-	if err := gcc.SetupGcc(); err != nil {
-		log.Fatalf("Error setting up Gcc: %v\n", err)
-	}
 }
 
 func runSsh() {
@@ -162,5 +132,12 @@ func runNode() {
 	if err != nil {
 		log.Fatalf("Error setting up Nodejs: %v\n", err)
 	}
+}
 
+func runNeovimRequirements() {
+	println("Running Neovim requirements and other packages setup")
+	err := neovimreq.SetupNeovimRequirements()
+	if err != nil {
+		log.Fatalf("Error setting up Neovim requirements and other packages: %v\n", err)
+	}
 }
