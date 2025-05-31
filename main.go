@@ -16,6 +16,10 @@ import (
 
 // TODO: create a custom print util to print with colors and icons
 // TODO: add help command to print all sub commands
+// TODO: create binary github installer, aka for go, node, neovim, etc.
+
+// TODO: change "bootstrap" script to only download binary and not install, but use binary to compile and run main.go.
+// Let main.go handle the installation of all dependencies included Go.
 
 func main() {
 	printInitializationBanner()
