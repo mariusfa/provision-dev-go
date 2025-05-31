@@ -1,15 +1,24 @@
 package aptinstaller
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 type fakeRunner struct {
-	isInstalled bool
+	IsInstalled bool
 }
 
 func (f *fakeRunner) Run(name string, arg ...string) error {
-	// check curl --version return error
-	// check  apt install -y curl return nil
-	return nil
+	if name == "curl" && arg[0] == "--version" && f.IsInstalled {
+		return nil
+	}
+	if name == "sudo" && arg[0] == "apt" && arg[1] == "install" && arg[2] == "-y" && arg[3] == "curl" {
+		f.IsInstalled = true
+		return nil
+	}
+
+	return errors.New("command failed")
 }
 
 func (f *fakeRunner) RunWithOutput(name string, arg ...string) (string, error) {
@@ -17,7 +26,7 @@ func (f *fakeRunner) RunWithOutput(name string, arg ...string) (string, error) {
 }
 
 func newFakeRunner() *fakeRunner {
-	return &fakeRunner{}
+	return &fakeRunner{IsInstalled: false}
 }
 
 func TestAptInstaller(t *testing.T) {
@@ -28,13 +37,7 @@ func TestAptInstaller(t *testing.T) {
 		t.Errorf("InstallPackage() failed: %v", err)
 	}
 
-	expectedCheckInstalledCommand := "curl --version"
-	if fakeCommandRunner.checkInstalled != expectedCheckInstalledCommand {
-		t.Errorf("Expected command: %s, got: %s", expectedCheckInstalledCommand, fakeCommandRunner.checkInstalled)
-	}
-
-	expectedInstallCommand := "sudo apt install -y curl"
-	if fakeCommandRunner.installCommand != expectedInstallCommand {
-		t.Errorf("Expected command: %s, got: %s", expectedInstallCommand, fakeCommandRunner.installCommand)
+	if !fakeCommandRunner.IsInstalled {
+		t.Error("Package 'curl' was not installed as expected")
 	}
 }
