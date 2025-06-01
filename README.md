@@ -1,3 +1,26 @@
+# Prvision Dev Go
+Personal provisioning of my ubuntu development environment. Using Go for this becuase why not? :)
+
+## Usage
+```bash
+./provision.sh
+```
+
+This will install a go version in `/usr/local/go`, and then run the `main.go` file in the current directory.
+
+`main.go` will also install go in `~/app/go` and create a symlink in `~/apps/bin/go`. This go version will be your main go version for development.
+
+After the first run, you can use `go run main.go` to run the provisioning script again.
+
+## Running seperate parts of provisioning
+```bash
+go run main.go <app-name>
+```
+
+Example for neovim install:
+```bash
+go run main.go nvim
+```
 
 
 ### Copilot auth
