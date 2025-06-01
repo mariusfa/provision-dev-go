@@ -17,6 +17,7 @@ const (
 	NEOVIM
 	NEOVIM_CONFIG
 	NODE
+	GO
 	UNKNOWN
 )
 
@@ -54,6 +55,8 @@ func CliParser() (SubPackage, error) {
 		return NODE, nil
 	case "neovim-req":
 		return NEOVIM_REQ, nil
+	case "go":
+		return GO, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")
