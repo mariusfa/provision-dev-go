@@ -25,6 +25,8 @@ func SetupSSH() error {
 		if err := generateSshKey(email); err != nil {
 			return err
 		}
+	} else {
+		fmt.Println("SSH key already exists at:", publicKeyPath)
 	}
 
 	if err := setPublicKey(publicKeyPath); err != nil {
