@@ -1,4 +1,4 @@
-package goloang
+package golang
 
 import bininstaller "provision/internal/utils/bin-installer"
 

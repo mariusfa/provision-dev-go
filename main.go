@@ -6,6 +6,7 @@ import (
 	"provision/internal/alias"
 	"provision/internal/apps"
 	"provision/internal/git"
+	"provision/internal/golang"
 	"provision/internal/neovim"
 	neovimconfig "provision/internal/neovim-config"
 	neovimreq "provision/internal/neovim-req"
@@ -49,6 +50,8 @@ func main() {
 		runNode()
 	case cliparser.NEOVIM_REQ:
 		runNeovimRequirements()
+	case cliparser.GO:
+		runGo()
 	default:
 		fmt.Println("Invalid option")
 	}
@@ -143,5 +146,13 @@ func runNeovimRequirements() {
 	err := neovimreq.SetupNeovimRequirements()
 	if err != nil {
 		log.Fatalf("Error setting up Neovim requirements and other packages: %v\n", err)
+	}
+}
+
+func runGo() {
+	println("Running Go setup")
+	err := golang.SetupGo()
+	if err != nil {
+		log.Fatalf("Error setting up Go: %v\n", err)
 	}
 }

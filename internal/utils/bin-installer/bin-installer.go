@@ -24,6 +24,9 @@ func InstallPackage(name, downloadURL string) error {
 	if err != nil {
 		return err
 	}
+	if name == "go" {
+		folder = "go" // special case for Go, as it doesn't follow the same naming convention
+	}
 
 	if err := download(downloadURL); err != nil {
 		return err
@@ -55,6 +58,7 @@ func InstallPackage(name, downloadURL string) error {
 	return nil
 }
 
+// TODO: check if name exists in app/bin. aka fix go
 func isPackageInstalled(name string) bool {
 	if err := runner.Run(name, "--version"); err != nil {
 		return false
