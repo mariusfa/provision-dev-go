@@ -55,9 +55,10 @@ func InstallPackage(name, downloadURL string) error {
 	return nil
 }
 
-// TODO: check if name exists in app/bin. aka fix go
 func isPackageInstalled(name string) bool {
-	if err := runner.Run(name, "--version"); err != nil {
+	appsPath := os.Getenv("HOME") + "/apps/bin/" + name
+	_, err := os.Stat(appsPath)
+	if os.IsNotExist(err) {
 		return false
 	}
 	return true
