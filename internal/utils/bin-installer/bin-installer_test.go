@@ -22,7 +22,7 @@ func (f *fakeRunner) Run(name string, arg ...string) error {
 		return nil
 	}
 
-	if name == "ln" && arg[0] == "-s" && arg[1] == "/home/mariusfa/apps/file/bin/nvim" && arg[2] == "/home/mariusfa/apps/bin/nvim" {
+	if name == "ln" && arg[0] == "-s" && arg[1] == "/home/mariusfa/apps/nvim/bin/nvim" && arg[2] == "/home/mariusfa/apps/bin/nvim" {
 		f.IsInstalled = true
 		return nil
 	}

@@ -19,20 +19,17 @@ func InstallPackage(name, downloadURL string) error {
 	if err != nil {
 		return err
 	}
-
-	folder, err := getFolderFromFilename(filename)
-	if err != nil {
-		return err
-	}
-	if name == "go" {
-		folder = "go" // special case for Go, as it doesn't follow the same naming convention
-	}
+	folder := name
 
 	if err := download(downloadURL); err != nil {
 		return err
 	}
 
-	if err := extract(filename); err != nil {
+	if err := createExtractFolder(folder); err != nil {
+		return err
+	}
+
+	if err := extract(filename, folder); err != nil {
 		return err
 	}
 
@@ -77,16 +74,6 @@ func getFilenameFromURL(url string) (string, error) {
 	return filename, nil
 }
 
-// example filename: nvim-linux-x86_64.tar.gz
-func getFolderFromFilename(filename string) (string, error) {
-	parts := strings.Split(filename, ".")
-	if len(parts) < 3 {
-		return "", fmt.Errorf("invalid filename: %s", filename)
-	}
-	folder := strings.Join(parts[:len(parts)-2], ".")
-	return folder, nil
-}
-
 func download(url string) error {
 	println("Downloading", url)
 	if err := runner.Run("wget", url); err != nil {
@@ -95,11 +82,17 @@ func download(url string) error {
 	return nil
 }
 
-func extract(filename string) error {
+func createExtractFolder(folder string) error {
+	extractPath := os.Getenv("HOME") + "/apps/" + folder
+	println("Creating extract folder", extractPath)
+	return os.MkdirAll(extractPath, os.ModePerm)
+}
+
+func extract(filename string, folder string) error {
 	println("Extracting", filename)
-	appsPath := os.Getenv("HOME") + "/apps"
+	appsPath := os.Getenv("HOME") + "/apps/" + folder
 	fmt.Printf("Extracting to: %s\n", appsPath)
-	if err := runner.Run("tar", "-xvf", filename, "-C", appsPath); err != nil {
+	if err := runner.Run("tar", "-xvf", filename, "-C", appsPath, "--strip-components=1"); err != nil {
 		return fmt.Errorf("error extracting %s: %w", filename, err)
 	}
 	return nil
