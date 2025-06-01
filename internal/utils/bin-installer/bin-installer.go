@@ -51,6 +51,7 @@ func InstallPackage(name, downloadURL string) error {
 		return err
 	}
 
+	println(name + " installed successfully")
 	return nil
 }
 
