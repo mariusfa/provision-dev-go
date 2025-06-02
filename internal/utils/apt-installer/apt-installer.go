@@ -20,9 +20,8 @@ func InstallPackage(packageName string) error {
 
 func isPackageInstalled(packageName string) bool {
 	command := commandMapper(packageName)
-	errUsualVersion := runner.Run(command, "--version")
-	errAlternativeVersion := runner.Run(command, "-version")
-	if errUsualVersion == nil || errAlternativeVersion == nil {
+	versionCommand := versionMapper(packageName)
+	if err := runner.Run(command, versionCommand); err == nil {
 		return true
 	}
 	return false
@@ -33,4 +32,17 @@ func commandMapper(packageName string) string {
 		return "rg"
 	}
 	return packageName
+}
+
+func versionMapper(packageName string) string {
+	switch packageName {
+	case "xclip":
+		return "-version"
+	case "tmux":
+		return "-V"
+	case "unzip":
+		return "-v"
+	default:
+		return "--version"
+	}
 }
