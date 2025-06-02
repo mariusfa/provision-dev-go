@@ -18,6 +18,7 @@ func InstallPackage(packageName string) error {
 	return nil
 }
 
+// TODO: find fix for ripgrep not showing as installed
 func isPackageInstalled(packageName string) bool {
 	errUsualVersion := runner.Run(packageName, "--version")
 	errAlternativeVersion := runner.Run(packageName, "-version")
