@@ -8,6 +8,7 @@ var packagesToInstall = []string{
 	"xclip",
 	"gcc",
 	"fzf",
+	"tmux",
 }
 
 func SetupNeovimRequirements() error {
