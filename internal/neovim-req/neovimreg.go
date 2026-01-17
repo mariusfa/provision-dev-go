@@ -1,6 +1,6 @@
 package neovimreq
 
-import aptinstaller "provision/internal/utils/apt-installer"
+import pkginstaller "provision/internal/utils/pkg-installer"
 
 var packagesToInstall = []string{
 	"unzip",
@@ -13,7 +13,7 @@ var packagesToInstall = []string{
 
 func SetupNeovimRequirements() error {
 	for _, packageName := range packagesToInstall {
-		if err := aptinstaller.InstallPackage(packageName); err != nil {
+		if err := pkginstaller.InstallPackage(packageName); err != nil {
 			return err
 		}
 	}

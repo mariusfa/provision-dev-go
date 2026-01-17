@@ -75,11 +75,11 @@ func printRememberSourceProfile() {
 
 func runAll() {
 	println("Running all")
+	runApps()
 	runNeovimRequirements()
 	runNode()
 	runSsh()
 	runGit()
-	runApps()
 	runAlias()
 	runNeovim()
 	runNeovimConfig()
