@@ -6,6 +6,7 @@ func TestSetupTmuxConfig(t *testing.T) {
 	isTmuxConfigClonedResult := false
 	isCloneTmuxConfigCalled := false
 	isSymlinkTmuxConfigCalled := false
+	isCloneCatppuccinCalled := false
 
 	tmuxConfigExists = func() bool {
 		return isTmuxConfigClonedResult
@@ -17,6 +18,10 @@ func TestSetupTmuxConfig(t *testing.T) {
 	}
 	symlinkTmuxConfig = func() error {
 		isSymlinkTmuxConfigCalled = true
+		return nil
+	}
+	cloneCatppuccin = func() error {
+		isCloneCatppuccinCalled = true
 		return nil
 	}
 
@@ -33,12 +38,16 @@ func TestSetupTmuxConfig(t *testing.T) {
 	if !isSymlinkTmuxConfigCalled {
 		t.Errorf("SetupTmuxConfig() failed: symlinkTmuxConfig() not called")
 	}
+	if !isCloneCatppuccinCalled {
+		t.Errorf("SetupTmuxConfig() failed: cloneCatppuccin() not called")
+	}
 }
 
 func TestSetupTmuxConfigAlreadyCloned(t *testing.T) {
 	isTmuxConfigClonedResult := true
 	isCloneTmuxConfigCalled := false
 	isSymlinkTmuxConfigCalled := false
+	isCloneCatppuccinCalled := false
 
 	tmuxConfigExists = func() bool {
 		return isTmuxConfigClonedResult
@@ -49,6 +58,10 @@ func TestSetupTmuxConfigAlreadyCloned(t *testing.T) {
 	}
 	symlinkTmuxConfig = func() error {
 		isSymlinkTmuxConfigCalled = true
+		return nil
+	}
+	cloneCatppuccin = func() error {
+		isCloneCatppuccinCalled = true
 		return nil
 	}
 
@@ -63,5 +76,8 @@ func TestSetupTmuxConfigAlreadyCloned(t *testing.T) {
 	}
 	if isSymlinkTmuxConfigCalled {
 		t.Errorf("SetupTmuxConfig() failed: symlinkTmuxConfig() called")
+	}
+	if isCloneCatppuccinCalled {
+		t.Errorf("SetupTmuxConfig() failed: cloneCatppuccin() called")
 	}
 }

@@ -7,8 +7,10 @@ import (
 )
 
 const githubTmuxConfigURL = "git@github.com:mariusfa/tmux-config.git"
+const githubCatppuccinURL = "https://github.com/catppuccin/tmux.git"
 
 var tmuxConfigPath = os.Getenv("HOME") + "/.config/tmux"
+var catppuccinPluginPath = tmuxConfigPath + "/plugins/catppuccin/tmux"
 var tmuxConfigFile = tmuxConfigPath + "/.tmux.conf"
 var tmuxSymlinkPath = os.Getenv("HOME") + "/.tmux.conf"
 
@@ -26,6 +28,10 @@ func SetupTmuxConfig() error {
 	println("Tmux config cloned")
 
 	if err := symlinkTmuxConfig(); err != nil {
+		return err
+	}
+
+	if err := cloneCatppuccin(); err != nil {
 		return err
 	}
 
@@ -51,6 +57,14 @@ var symlinkTmuxConfig = func() error {
 	println("Symlinking tmux config")
 	if err := runner.Run("ln", "-s", tmuxConfigFile, tmuxSymlinkPath); err != nil {
 		return fmt.Errorf("error symlinking tmux config: %w", err)
+	}
+	return nil
+}
+
+var cloneCatppuccin = func() error {
+	println("Cloning catppuccin plugin")
+	if err := runner.Run("git", "clone", githubCatppuccinURL, catppuccinPluginPath); err != nil {
+		return fmt.Errorf("error cloning catppuccin plugin: %w", err)
 	}
 	return nil
 }
