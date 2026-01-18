@@ -5,6 +5,7 @@ import "testing"
 func TestSetupTmuxConfig(t *testing.T) {
 	isTmuxConfigClonedResult := false
 	isCloneTmuxConfigCalled := false
+	isSymlinkTmuxConfigCalled := false
 
 	tmuxConfigExists = func() bool {
 		return isTmuxConfigClonedResult
@@ -12,6 +13,10 @@ func TestSetupTmuxConfig(t *testing.T) {
 	cloneTmuxConfig = func() error {
 		isTmuxConfigClonedResult = true
 		isCloneTmuxConfigCalled = true
+		return nil
+	}
+	symlinkTmuxConfig = func() error {
+		isSymlinkTmuxConfigCalled = true
 		return nil
 	}
 
@@ -25,11 +30,16 @@ func TestSetupTmuxConfig(t *testing.T) {
 	if !isCloneTmuxConfigCalled {
 		t.Errorf("SetupTmuxConfig() failed: cloneTmuxConfig() not called")
 	}
+	if !isSymlinkTmuxConfigCalled {
+		t.Errorf("SetupTmuxConfig() failed: symlinkTmuxConfig() not called")
+	}
 }
 
 func TestSetupTmuxConfigAlreadyCloned(t *testing.T) {
 	isTmuxConfigClonedResult := true
 	isCloneTmuxConfigCalled := false
+	isSymlinkTmuxConfigCalled := false
+
 	tmuxConfigExists = func() bool {
 		return isTmuxConfigClonedResult
 	}
@@ -37,6 +47,11 @@ func TestSetupTmuxConfigAlreadyCloned(t *testing.T) {
 		isCloneTmuxConfigCalled = true
 		return nil
 	}
+	symlinkTmuxConfig = func() error {
+		isSymlinkTmuxConfigCalled = true
+		return nil
+	}
+
 	if err := SetupTmuxConfig(); err != nil {
 		t.Errorf("SetupTmuxConfig() failed: %v", err)
 	}
@@ -45,5 +60,8 @@ func TestSetupTmuxConfigAlreadyCloned(t *testing.T) {
 	}
 	if isCloneTmuxConfigCalled {
 		t.Errorf("SetupTmuxConfig() failed: cloneTmuxConfig() called")
+	}
+	if isSymlinkTmuxConfigCalled {
+		t.Errorf("SetupTmuxConfig() failed: symlinkTmuxConfig() called")
 	}
 }

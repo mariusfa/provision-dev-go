@@ -9,6 +9,8 @@ import (
 const githubTmuxConfigURL = "git@github.com:mariusfa/tmux-config.git"
 
 var tmuxConfigPath = os.Getenv("HOME") + "/.config/tmux"
+var tmuxConfigFile = tmuxConfigPath + "/.tmux.conf"
+var tmuxSymlinkPath = os.Getenv("HOME") + "/.tmux.conf"
 
 var runner commandrunner.ICommandRunner = commandrunner.NewCommandRunner()
 
@@ -21,8 +23,12 @@ func SetupTmuxConfig() error {
 	if err := cloneTmuxConfig(); err != nil {
 		return err
 	}
-
 	println("Tmux config cloned")
+
+	if err := symlinkTmuxConfig(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -37,6 +43,14 @@ var tmuxConfigExists = func() bool {
 var cloneTmuxConfig = func() error {
 	if err := runner.Run("git", "clone", githubTmuxConfigURL, tmuxConfigPath); err != nil {
 		return fmt.Errorf("error cloning tmux config: %w", err)
+	}
+	return nil
+}
+
+var symlinkTmuxConfig = func() error {
+	println("Symlinking tmux config")
+	if err := runner.Run("ln", "-s", tmuxConfigFile, tmuxSymlinkPath); err != nil {
+		return fmt.Errorf("error symlinking tmux config: %w", err)
 	}
 	return nil
 }
