@@ -18,6 +18,7 @@ const (
 	NEOVIM_CONFIG
 	NODE
 	GO
+	TMUX_CONFIG
 	UNKNOWN
 )
 
@@ -57,6 +58,8 @@ func CliParser() (SubPackage, error) {
 		return NEOVIM_REQ, nil
 	case "go":
 		return GO, nil
+	case "tmux-config":
+		return TMUX_CONFIG, nil
 	}
 
 	return UNKNOWN, errors.New("unknown command")

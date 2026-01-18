@@ -12,6 +12,7 @@ import (
 	neovimreq "provision/internal/neovim-req"
 	"provision/internal/node"
 	"provision/internal/ssh"
+	tmuxconfig "provision/internal/tmux-config"
 	"provision/internal/utils/cliparser"
 )
 
@@ -52,6 +53,8 @@ func main() {
 		runNeovimRequirements()
 	case cliparser.GO:
 		runGo()
+	case cliparser.TMUX_CONFIG:
+		runTmuxConfig()
 	default:
 		fmt.Println("Invalid option")
 	}
@@ -83,6 +86,7 @@ func runAll() {
 	runAlias()
 	runNeovim()
 	runNeovimConfig()
+	runTmuxConfig()
 }
 
 func runSsh() {
@@ -154,5 +158,13 @@ func runGo() {
 	err := golang.SetupGo()
 	if err != nil {
 		log.Fatalf("Error setting up Go: %v\n", err)
+	}
+}
+
+func runTmuxConfig() {
+	println("Running Tmux config setup")
+	err := tmuxconfig.SetupTmuxConfig()
+	if err != nil {
+		log.Fatalf("Error setting up Tmux config: %v\n", err)
 	}
 }
